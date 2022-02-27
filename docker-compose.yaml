@@ -1,8 +1,23 @@
 version: "3.8"
 services:
+
   mongodb:
     image: mongo
     container_name: mongodb-otel-troubleshooting
     ports:
       - 27017:27017
+
+  otelcol:
+    image: otel/opentelemetry-collector:0.39.0
+    command: ["--config=/etc/otelcol-config.yaml"]
+    volumes:
+      - ./otelcol/otelcol-config.yaml/:/etc/otelcol-config.yaml
+    ports: 
+      - "4318:4318"
     
+  jaeger-all-in-one:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "16686:16686"
+      - "14268"
+      - "14250"

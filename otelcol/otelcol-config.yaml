@@ -1,0 +1,19 @@
+receivers:
+  otlp:
+    protocols: 
+      http:
+
+exporters:
+
+  jaeger:
+    endpoint: jaeger-all-in-one:14250
+    tls:
+      insecure: true
+
+  logging:
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      exporters: [jaeger]

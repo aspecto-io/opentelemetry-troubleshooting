@@ -1,3 +1,4 @@
+require('./tracing.ts');
 import express from 'express';
 import mongoose from 'mongoose';
 
