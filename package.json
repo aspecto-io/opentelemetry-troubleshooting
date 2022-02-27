@@ -15,11 +15,15 @@
   "dependencies": {
     "@opentelemetry/api": "^1.0.4",
     "@opentelemetry/exporter-otlp-proto": "^0.26.0",
+    "@opentelemetry/instrumentation": "^0.27.0",
+    "@opentelemetry/instrumentation-http": "^0.27.0",
     "@opentelemetry/resources": "^1.0.1",
     "@opentelemetry/sdk-trace-base": "^1.0.1",
     "@opentelemetry/sdk-trace-node": "^1.0.1",
     "@opentelemetry/semantic-conventions": "^1.0.1",
     "express": "^4.17.3",
-    "mongoose": "^6.2.3"
+    "mongoose": "^6.2.3",
+    "opentelemetry-instrumentation-express": "^0.27.0",
+    "opentelemetry-instrumentation-mongoose": "^0.27.0"
   }
 }
