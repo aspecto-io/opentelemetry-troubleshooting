@@ -16,7 +16,7 @@ import { MongooseInstrumentation } from "opentelemetry-instrumentation-mongoose"
 const provider = new NodeTracerProvider({ 
     resource: new Resource({[SemanticResourceAttributes.SERVICE_NAME]: 'otel-troubleshooting'})
 });
-const exporter = new OTLPTraceExporter({});
+const exporter = new OTLPTraceExporter({ url: 'http://localhost:4318/v1/traces'});
 provider.addSpanProcessor(new SimpleSpanProcessor(exporter));
 provider.register();
 

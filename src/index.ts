@@ -1,6 +1,6 @@
-require('./tracing.ts');
 import express from 'express';
 import mongoose from 'mongoose';
+require('./tracing.ts');
 
 // mongoose (mongodb ORM) schema and model
 const userSchema = new mongoose.Schema({
