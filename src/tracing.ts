@@ -20,11 +20,6 @@ const myCustomSampler: Sampler = {
         if(attributes[SemanticAttributes.HTTP_TARGET] === '/users') {
             return ratioSampler.shouldSample(context, traceId, spanName, spanKind, attributes, links);
         }
-        if (process.env.NODE_ENV === 'development') {
-            return {
-                decision: SamplingDecision.RECORD_AND_SAMPLED
-            }    
-        }
         return {
             decision: SamplingDecision.RECORD_AND_SAMPLED
         }
@@ -34,7 +29,7 @@ const myCustomSampler: Sampler = {
 // register provider with sampler
 const provider = new NodeTracerProvider({ 
     resource: new Resource({[SemanticResourceAttributes.SERVICE_NAME]: 'otel-troubleshooting'}),
-    sampler: new ParentBasedSampler({ root: myCustomSampler }),
+    sampler: myCustomSampler,
 });
 const exporter = new OTLPTraceExporter({ url: 'http://localhost:4318/v1/traces'});
 provider.addSpanProcessor(new SimpleSpanProcessor(exporter));
