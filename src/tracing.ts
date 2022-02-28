@@ -20,6 +20,11 @@ const myCustomSampler: Sampler = {
         if(attributes[SemanticAttributes.HTTP_TARGET] === '/users') {
             return ratioSampler.shouldSample(context, traceId, spanName, spanKind, attributes, links);
         }
+        if (process.env.NODE_ENV === 'development') {
+            return {
+                decision: SamplingDecision.RECORD_AND_SAMPLED
+            }    
+        }
         return {
             decision: SamplingDecision.RECORD_AND_SAMPLED
         }
