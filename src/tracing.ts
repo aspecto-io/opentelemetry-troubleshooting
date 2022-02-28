@@ -8,10 +8,15 @@ import { HttpInstrumentation } from "@opentelemetry/instrumentation-http";
 import { ExpressInstrumentation } from "opentelemetry-instrumentation-express";
 import { MongooseInstrumentation } from "opentelemetry-instrumentation-mongoose";
 
+// import { getEnv } from "@opentelemetry/core"
+// import { diag, DiagConsoleLogger, DiagLogLevel } from "@opentelemetry/api";
+// // diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.DEBUG);
+// diag.setLogger(new DiagConsoleLogger(), getEnv().OTEL_LOG_LEVEL);
+
 const provider = new NodeTracerProvider({ 
     resource: new Resource({[SemanticResourceAttributes.SERVICE_NAME]: 'otel-troubleshooting'})
 });
-const exporter = new OTLPTraceExporter({ url: 'http://localhost:4318/v1/traces'});
+const exporter = new OTLPTraceExporter({});
 provider.addSpanProcessor(new SimpleSpanProcessor(exporter));
 provider.register();
 
