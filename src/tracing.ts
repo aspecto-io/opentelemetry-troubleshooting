@@ -8,7 +8,7 @@ import { registerInstrumentations } from "@opentelemetry/instrumentation";
 import { HttpInstrumentation } from "@opentelemetry/instrumentation-http";
 import { ExpressInstrumentation } from "opentelemetry-instrumentation-express";
 import { MongooseInstrumentation } from "opentelemetry-instrumentation-mongoose";
-import { RedisInstrumentation } from "@opentelemetry/instrumentation-redis";
+import { IORedisInstrumentation } from "@opentelemetry/instrumentation-ioredis";
 
 import { getEnv } from "@opentelemetry/core"
 import { diag, DiagConsoleLogger } from "@opentelemetry/api";
@@ -25,7 +25,7 @@ registerInstrumentations({ instrumentations: [
     new HttpInstrumentation(),
     new ExpressInstrumentation(),
     new MongooseInstrumentation(),
-    new RedisInstrumentation(),
+    new IORedisInstrumentation(),
 ]})
 console.log('tracing enabled');
 
