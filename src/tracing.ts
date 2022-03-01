@@ -8,6 +8,7 @@ import { registerInstrumentations } from "@opentelemetry/instrumentation";
 import { HttpInstrumentation } from "@opentelemetry/instrumentation-http";
 import { ExpressInstrumentation } from "opentelemetry-instrumentation-express";
 import { MongooseInstrumentation } from "opentelemetry-instrumentation-mongoose";
+import { RedisInstrumentation } from "@opentelemetry/instrumentation-redis";
 
 const provider = new NodeTracerProvider({ 
     resource: new Resource({[SemanticResourceAttributes.SERVICE_NAME]: 'otel-troubleshooting'})
@@ -20,6 +21,7 @@ registerInstrumentations({ instrumentations: [
     new HttpInstrumentation(),
     new ExpressInstrumentation(),
     new MongooseInstrumentation(),
+    new RedisInstrumentation(),
 ]})
 console.log('tracing enabled');
 

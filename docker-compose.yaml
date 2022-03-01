@@ -7,6 +7,12 @@ services:
     ports:
       - 27017:27017
 
+  redis:
+    image: redis
+    container_name: redis-otel-troubleshooting
+    ports:
+      - 6379:6379
+
   otelcol:
     image: otel/opentelemetry-collector:0.39.0
     command: ["--config=/etc/otelcol-config.yaml"]
