@@ -1,6 +1,7 @@
 require('./tracing.ts');
 import express from 'express';
 import mongoose from 'mongoose';
+import { createClient } from 'redis';
 
 // mongoose (mongodb ORM) schema and model
 const userSchema = new mongoose.Schema({
@@ -19,6 +20,18 @@ const User = mongoose.model('User', userSchema);
     }
 })();
 
+let redisClient: any;
+// connect to redis
+(async () => {
+    try {
+        redisClient = createClient();
+        await redisClient.connect();
+        console.log('connected to redis');
+    } catch (err) {
+        console.log('failed to connect to redis', err);
+    }
+})();
+
 // http endpoints
 const app = express();
 app.use(express.json());
@@ -34,6 +47,7 @@ app.post('/users', async (req, res: express.Response) => {
     try {
         const newUser = new User(req.body);
         await newUser.save();
+        await redisClient.incr('users_count');
         res.sendStatus(200);    
     } catch (err) {
         console.log('failed creating new user', err);
